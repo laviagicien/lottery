@@ -1,0 +1,12 @@
+h1 {
+    font-size: 10em;
+}
+
+#go {
+    width: 10em;
+    height: 10em;
+}
+.col {
+    margin-top :1.5em;
+    margin-bottom: 1.5em;
+}

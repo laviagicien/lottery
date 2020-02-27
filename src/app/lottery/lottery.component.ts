@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lottery.component.css']
 })
 export class LotteryComponent implements OnInit {
-
+  show = true;
   constructor() { }
 
   ngOnInit() {
