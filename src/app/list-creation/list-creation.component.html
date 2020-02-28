@@ -11,43 +11,54 @@
         </div>
     </div>
 
-    <div class="row" style="margin-top: 0.5em; margin-bottom: 0.5em;">
-            <div class="col-4 offset-md-2">
-                Sam
-            </div>
-            <div class="col-2 text-center">
-                4
-            </div>
-            <div class="col-4">
-                <button class="btn btn-warning btn-sm my-auto"
-                        style="margin-right: 0.5em; margin-left: 1em">
-                    <i class="material-icons align-middle">
-                        edit
-                    </i>
-                </button>
-                <button class="btn btn-danger btn-sm my-auto">
-                    <i class="material-icons align-middle">
-                        close
-                    </i>
-                </button>
-            </div>
+    <div class="row" style="margin-top: 0.5em; margin-bottom: 0.5em;"
+         *ngFor="let p of participantService.getAllParticipant(); let i=index">
+        <div class="col-4 offset-md-2">
+            {{p.name}}
         </div>
+        <div class="col-2 text-center">
+            {{p.nbTicket}}
+        </div>
+        <div class="col-4">
+            <button class="btn btn-warning btn-sm my-auto"
+                    style="margin-right: 0.5em; margin-left: 1em">
+                <i class="material-icons align-middle">
+                    edit
+                </i>
+            </button>
+            <button class="btn btn-danger btn-sm my-auto"
+                    (click)="deleteAParticipant(i)">
+                <i class="material-icons align-middle">
+                    close
+                </i>
+            </button>
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="row align-middle">
         <div class="col-4 offset-md-2 my-auto">
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name" value="" 
+                   style="width: 90%;">
         </div>
-        <div class="col-2 my-auto">
-            <input type="text" name="nbT" id="nbT">
+        <div class="col-2 my-auto text-center">
+            <input type="text" name="nbT" id="nbT" value=""
+                   style="width: 4em;">
         </div>
         <div class="col-4" >
             <button class="btn btn-success btn-sm my-auto"
-                    style="margin-left: 1em;">
+                    style="margin-left: 1em;" (click)="addParticipant()">
                         <i class="material-icons align-middle">
                             check
                         </i>
             </button>
         </div>
    </div>
+</div>
+<div class="container" style="margin-top: 1em;">
+    <div class="row">
+        <div class="col-1 offset-md-8">
+            <button class="btn btn-primary">Sauvegarder</button>
+        </div>
+    </div>
 </div>
