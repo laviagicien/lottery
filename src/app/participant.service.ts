@@ -21,5 +21,9 @@ export class ParticipantService {
   deleteAParticipant(id: number) {
     this.allParticipant.splice(id, 1);
   }
+  updateAParticipant(id: number, name: string, nbTicket: number) {
+    this.allParticipant[id].name = name;
+    this.allParticipant[id].nbTicket = nbTicket;
+  }
 
 }
