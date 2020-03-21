@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ParticipantService } from '../participant.service';
 import { Participant } from '../participant.model';
-import * as fs from 'file-system';
 
 @Component({
   selector: 'app-list-creation',
@@ -27,7 +26,7 @@ export class ListCreationComponent implements OnInit {
   }
 
   deleteAParticipant(id: number) {
-    this.participantService.deleteAParticipant(id)
+    this.participantService.deleteAParticipant(id);
   }
 
   updateStatus(i: number) {
@@ -49,17 +48,9 @@ export class ListCreationComponent implements OnInit {
                             .value;
     this.participantService.updateAParticipant(id, name, parseInt(nbTicket, 10));
     (document.getElementById('updateLine' + id.toString()) as HTMLElement)
-      .classList.add('hide')
+      .classList.add('hide');
   }
 
-  saveList() {
-    const saveList = this.participantService.getAllParticipant();
-    const saveListString = JSON.stringify(saveList);
-    console.log(saveListString);
-    fs.writeFile('src/assets/data/participants.txt', saveListString, (err: any) => {
-      console.log(err);
-    });
-    console.log('----------------------')
-    console.log(JSON.parse(saveListString));
-  }
+  /* saveList() {
+  } */
 }
