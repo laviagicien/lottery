@@ -8,11 +8,13 @@ import { Participant } from '../participant.model';
   styleUrls: ['./lottery.component.css']
 })
 export class LotteryComponent implements OnInit {
-  show = true;
+  show: boolean;
   displayPlayer = 'Player';
-  constructor(private participantService: ParticipantService) { }
+  constructor(private participantService: ParticipantService) {}
 
   ngOnInit() {
+    this.show = this.participantService.getAllParticipant().length === 0 ? true : false;
+    console.log (this.show);
   }
 
   go() {
@@ -28,17 +30,19 @@ export class LotteryComponent implements OnInit {
       [listParticipant[i], listParticipant[j]] = [listParticipant[j], listParticipant[i]];
     }
     const winPos = Math.floor(Math.random() * (listParticipant.length + 1));
-    console.log(listParticipant[winPos]);
-    this.winner(listParticipant).then(w => this.displayPlayer = listParticipant[winPos]);
+    this.winner(listParticipant).then(() => {
+      this.displayPlayer = listParticipant[winPos];
+      this.reveal();
+    });
   }
 
   async winner(list: string[]) {
     for (let n = 0; n < 3; n++) {
-      let ms: number; 
-      if (n === 0) {ms = 200; }
-      if (n === 1) {ms = 250; }
-      if (n === 2) {ms = 300; }
-      console.log(ms);
+      let ms: number;
+      if (n === 0) {ms = 75; }
+      if (n === 1) {ms = 100; }
+      if (n === 2) {ms = 150; }
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < list.length; i++) {
         this.displayPlayer = list[i];
         await this.delay(ms);
@@ -46,10 +50,13 @@ export class LotteryComponent implements OnInit {
         await this.delay(ms);
       }
     }
-
   }
 
   private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  reveal() {
+    document.getElementById('displayPlayer').classList.add('win');
   }
 }

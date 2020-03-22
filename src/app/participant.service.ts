@@ -7,14 +7,7 @@ import { Participant } from './participant.model';
 export class ParticipantService {
   private allParticipant: Participant[] = [];
 
-  constructor() {
-    this.allParticipant = [
-      {name: 'Fred', nbTicket: 5},
-      {name: 'Sam', nbTicket: 6},
-      {name: 'Freeze', nbTicket: 7},
-      {name: 'Dan', nbTicket: 4},
-    ]
-   }
+  constructor() {}
 
   setParticpant(participant: Participant) {
     this.allParticipant.push(participant)
@@ -31,6 +24,13 @@ export class ParticipantService {
   updateAParticipant(id: number, name: string, nbTicket: number) {
     this.allParticipant[id].name = name;
     this.allParticipant[id].nbTicket = nbTicket;
+  }
+  getNumberOfTicket() {
+    let count = 0;
+    this.allParticipant.forEach((e) => {
+      count += e.nbTicket;
+    });
+    return count.toString();
   }
 
 }
