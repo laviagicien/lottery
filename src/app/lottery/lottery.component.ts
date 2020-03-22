@@ -27,15 +27,29 @@ export class LotteryComponent implements OnInit {
       const j = Math.floor(Math.random() * (i + 1));
       [listParticipant[i], listParticipant[j]] = [listParticipant[j], listParticipant[i]];
     }
-    this.winner(listParticipant);
+    const winPos = Math.floor(Math.random() * (listParticipant.length + 1));
+    console.log(listParticipant[winPos]);
+    this.winner(listParticipant).then(w => this.displayPlayer = listParticipant[winPos]);
   }
 
-  winner(list: string[]) {
-    const winPos = Math.floor(Math.random() * (list.length + 1));
-    for (let i = 0; i < list.length; i++) {
-      setTimeout(() => {this.displayPlayer = list[i]; }, i * 500);
-      setTimeout(() => {this.displayPlayer = ''; }, (i + 0.5) * 500);
+  async winner(list: string[]) {
+    for (let n = 0; n < 3; n++) {
+      let ms: number; 
+      if (n === 0) {ms = 200; }
+      if (n === 1) {ms = 250; }
+      if (n === 2) {ms = 300; }
+      console.log(ms);
+      for (let i = 0; i < list.length; i++) {
+        this.displayPlayer = list[i];
+        await this.delay(ms);
+        this.displayPlayer = '';
+        await this.delay(ms);
+      }
     }
+
   }
 
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }

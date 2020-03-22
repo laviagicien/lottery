@@ -7,7 +7,14 @@ import { Participant } from './participant.model';
 export class ParticipantService {
   private allParticipant: Participant[] = [];
 
-  constructor() { }
+  constructor() {
+    this.allParticipant = [
+      {name: 'Fred', nbTicket: 5},
+      {name: 'Sam', nbTicket: 6},
+      {name: 'Freeze', nbTicket: 7},
+      {name: 'Dan', nbTicket: 4},
+    ]
+   }
 
   setParticpant(participant: Participant) {
     this.allParticipant.push(participant)
