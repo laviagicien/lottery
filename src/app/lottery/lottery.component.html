@@ -21,6 +21,7 @@
         <div class="col mx-auto align-middle">
             <button id="go" class="rounded-circle btn btn-primary" 
                     data-toggle="button" aria-pressed="false"
+                    [disabled]="disabled"
                     (click)="go()">
                 <h2>Go !</h2>
             </button>

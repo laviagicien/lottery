@@ -9,15 +9,18 @@ import { Participant } from '../participant.model';
 })
 export class LotteryComponent implements OnInit {
   show: boolean;
+  disabled: boolean;
   displayPlayer = 'Player';
   constructor(private participantService: ParticipantService) {}
 
   ngOnInit() {
     this.show = this.participantService.getAllParticipant().length === 0 ? true : false;
-    console.log (this.show);
+    this.disabled = this.participantService.getAllParticipant().length === 0 ? true : false;
+
   }
 
   go() {
+    this.disabled = true;
     const allParticipant: Participant[] = this.participantService.getAllParticipant();
     const listParticipant: string[] = [];
     allParticipant.forEach( element => {
