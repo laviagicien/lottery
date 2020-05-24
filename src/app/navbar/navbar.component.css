@@ -10,5 +10,15 @@
 
 .logo {
     width: 5em;
-    margin-left: -5em;
+}
+
+.img {
+    width: 5em;
+    z-index: 100;
+}
+
+.navBtn {
+    margin-left: 1em;
+    margin-right: 1em;
+    z-index: 1;
 }

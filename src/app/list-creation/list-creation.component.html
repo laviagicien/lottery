@@ -69,11 +69,13 @@
         </div>
         <div class="col-2 my-auto text-center">
             <input type="text" name="nbT" id="nbT" value=""
-                   style="width: 4em;">
+                   style="width: 4em;"
+                   (keydown.enter)="addParticipant()">
         </div>
         <div class="col-4" >
             <button class="btn btn-success btn-sm my-auto"
-                    style="margin-left: 1em;" (click)="addParticipant()">
+                    style="margin-left: 1em;" 
+                    (click)="addParticipant()">
                         <i class="material-icons align-middle">
                             check
                         </i>
