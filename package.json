@@ -28,7 +28,7 @@
     "electron": "^9.0.0",
     "file-system": "^2.2.2",
     "global": "^4.4.0",
-    "jquery": "^3.5.1",
+    "jquery": "^3.5.0",
     "material-design-icons": "^3.0.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
