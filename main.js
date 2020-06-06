@@ -9,7 +9,10 @@ function createWindow() {
       { 
         width: 1020, 
         height: 650,
-        frame: false 
+        frame: false,
+        webPreferences: {
+          nodeIntegration: true,
+        } 
       });
     // load the dist folder from Angular
     win.loadURL(
@@ -23,12 +26,17 @@ function createWindow() {
     win.setResizable(false);
 
     // The following is optional and will open the DevTools:
-    // win.webContents.openDevTools()
+    // win.webContents.openDevTools();
+
+    // close window
     win.on("closed", () => {
       win = null;
     });
+   
   }
-  app.on("ready", createWindow);
+
+  app.on('ready', createWindow);
+  
   // on macOS, closing the window doesn't quit the app
   app.on("window-all-closed", () => {
     if (process.platform !== "darwin") {

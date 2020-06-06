@@ -1,0 +1,41 @@
+.header-nav {
+    display: grid;
+    grid-template-columns: 93% auto;
+    grid-template-rows: 35px;
+    background-color: lightslategray;
+    padding-left: 5px;
+    line-height: 35px;
+}
+
+.title {
+    font-size: 1.25em;
+    font-weight: bolder;
+    vertical-align: center;
+    -webkit-app-region: drag;
+}
+
+.icons {
+    text-align: right;
+    line-height: 24px;
+}
+
+.icon {
+    float: right;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+.icon-remove {
+    padding-top: 11px;
+}
+
+.icon-close {
+    padding-top: 6px;
+}
