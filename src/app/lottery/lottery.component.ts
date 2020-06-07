@@ -62,4 +62,12 @@ export class LotteryComponent implements OnInit {
   reveal() {
     document.getElementById('displayPlayer').classList.add('win');
   }
+
+  nbOfParticipant() {
+    return this.participantService.getAllParticipant().length;
+  }
+
+  nbOfTicket() {
+    return this.participantService.getNumberOfTicket();
+  }
 }

@@ -13,7 +13,7 @@
     </div>
     <!--Liste participant-->
     <div class="container" 
-         *ngFor="let p of participantService.getAllParticipant(); let i=index">
+         *ngFor="let p of getAllParticipant(); let i=index">
         <div class="row" style="margin-top: 0.5em; margin-bottom: 0.5em;">
             <div class="col-4 offset-md-2">
                 {{p.name}}
@@ -83,13 +83,4 @@
             </button>
         </div>
    </div>
-</div>
-<!--Sauvegarder-->
-<div class="container" style="margin-top: 1em;"
-     (click)="saveList()">
-    <div class="row">
-        <div class="col-1 offset-md-8">
-            <!-- <button class="btn btn-primary">Sauvegarder</button> -->
-        </div>
-    </div>
 </div>

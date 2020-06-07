@@ -51,6 +51,7 @@ export class ListCreationComponent implements OnInit {
       .classList.add('hide');
   }
 
-  /* saveList() {
-  } */
+  getAllParticipant() {
+    return this.participantService.getAllParticipant();
+  }
 }

@@ -14,10 +14,10 @@ function createWindow() {
           nodeIntegration: true,
         } 
       });
-    // load the dist folder from Angular
+   
     win.loadURL(
       url.format({
-        pathname: path.join(__dirname, "/dist/lottery/index.html"),
+        pathname: path.join(__dirname, `/dist/lottery/index.html`),
         protocol: "file:",
         slashes: true
       })
