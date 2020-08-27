@@ -67,13 +67,11 @@
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
   },
-
   "build": {
-    "files": [ 
-      "*.js", 
-      "dist/lottery", 
-      "node_modules" 
-  ] 
+    "files": [
+      "*.js",
+      "dist/lottery",
+      "node_modules"
+    ]
   }
-   
 }
