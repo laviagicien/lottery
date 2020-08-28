@@ -1,9 +1,9 @@
 <div class="container h-100">
     <div class="row text-center my-auto">
-        <div class="col">
+        <div class="col text">
             <h5 class="align-middle" style="color: red;" *ngIf="show else statut">Attention, aucun participant dans la liste</h5>
             <ng-template #statut> 
-                <span>
+                <span >
                     <h5>Nombre de participant : {{nbOfParticipant()}}</h5>
                 </span>
                 <span>

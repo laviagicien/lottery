@@ -7,7 +7,11 @@ import  Darkmode  from 'darkmode-js';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  darkmode = new Darkmode();
+  darkmode = new Darkmode({
+    mixColor: 'white',
+    backgroundColor: 'white',
+    saveInCookies : false
+  });
 
   constructor() { }
 
@@ -19,11 +23,7 @@ export class NavbarComponent implements OnInit {
   }
 
   darkMode() {
-    if(this.darkmode.isActivated()) {
-      this.darkmode.toggle();
-    } else {
-      this.darkmode.toggle();
-    }
+    this.darkmode.toggle()
   }
   
 }
