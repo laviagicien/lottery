@@ -1,5 +1,5 @@
 <!-- Nav Bar -->
-<div class="navBar" style="margin-top: 0.5em;">
+<div class="navBar darkmode-ignore" style="margin-top: 0.5em;">
         <div class="img">
             <img id="logo" class="logo" src="./assets/image/logo_dofus.png" alt="logo_dofus">
         </div>
@@ -38,7 +38,7 @@
                     <span class="label">Dark Mode</span>
                     <label class = "switch" for="darkMode">
                         <input type="checkbox" name="darkMode" id="darkMode">
-                        <span class="slider"></span>
+                        <span class="slider" (click)="darkMode()"></span>
                     </label>
                     
                     <!-- Image Selection -->

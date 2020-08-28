@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
+import  Darkmode  from 'darkmode-js';
 
 @Component({
   selector: 'app-navbar',
@@ -7,14 +7,23 @@ import * as $ from 'jquery';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  darkmode = new Darkmode();
+
   constructor() { }
 
   ngOnInit() {
-    console.log(document.getElementById('settingsModal'));
+    const tglBtn = <HTMLInputElement>document.getElementById('darkMode')
+    if(this.darkmode.isActivated()) {
+      tglBtn.checked = true;
+    }
   }
 
-  openModal() {
-    $('#settingsModal').modal('show');
+  darkMode() {
+    if(this.darkmode.isActivated()) {
+      this.darkmode.toggle();
+    } else {
+      this.darkmode.toggle();
+    }
   }
   
 }
