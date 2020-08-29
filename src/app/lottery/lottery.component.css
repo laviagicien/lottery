@@ -31,3 +31,7 @@ h1 {
     90% {color: orange;}
     100% {color: red;}
 }
+
+.display--activated .text {
+    color: white;
+}

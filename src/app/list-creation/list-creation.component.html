@@ -2,10 +2,10 @@
     <!--En-tête-->
     <div class="row">
         <div class="col-4 offset-md-2 border-bottom border-right">
-            Joueur
+            <h5>Joueur</h5>
         </div>
         <div class="col-2 border-bottom text-center">
-            Nombre de ticket
+            <h5>Nombre de ticket</h5>
         </div>
         <div class="col-4">
 
@@ -16,12 +16,12 @@
          *ngFor="let p of getAllParticipant(); let i=index">
         <div class="row" style="margin-top: 0.5em; margin-bottom: 0.5em;">
             <div class="col-4 offset-md-2">
-                {{p.name}}
+                <h6>{{p.name}}</h6>
             </div>
             <div class="col-2 text-center">
-                {{p.nbTicket}}
+                <h5>{{p.nbTicket}}</h5>
             </div>
-            <div class="col-4">
+            <div class="col-4 darkmode-ignore">
                 <button class="btn btn-warning btn-sm my-auto"
                         style="margin-right: 0.5em; margin-left: 1em"
                         (click) = 'updateStatus(i)'>
@@ -50,7 +50,7 @@
                        style="width: 4em;"
                        (keydown.enter)="updateParticipant(i)">
             </div>
-            <div class="col-4" >
+            <div class="col-4 darkmode-ignore" >
                 <button class="btn btn-success btn-sm my-auto"
                         style="margin-left: 1em;" (click)="updateParticipant(i)">
                     <i class="material-icons align-middle">
@@ -73,7 +73,7 @@
                    style="width: 4em;"
                    (keydown.enter)="addParticipant()">
         </div>
-        <div class="col-4" >
+        <div class="col-4 darkmode-ignore" >
             <button class="btn btn-success btn-sm my-auto"
                     style="margin-left: 1em;" 
                     (click)="addParticipant()">

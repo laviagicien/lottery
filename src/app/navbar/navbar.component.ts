@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import  Darkmode  from 'darkmode-js';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +9,8 @@ import  Darkmode  from 'darkmode-js';
 })
 export class NavbarComponent implements OnInit {
   darkmode = new Darkmode({
-    mixColor: 'white',
-    backgroundColor: 'white',
+    mixColor: '#f2f2f2',
+    backgroundColor: '#fff',
     saveInCookies : false
   });
 
@@ -24,6 +25,17 @@ export class NavbarComponent implements OnInit {
 
   darkMode() {
     this.darkmode.toggle()
+    const modal = document.getElementsByClassName('modal-content');
+    modal.item(0).classList.toggle('modalDarkmode');
   }
-  
+
+  closeColor(): String{
+    let color: String;
+    if(document.getElementsByClassName('modal-content').item(0).classList.contains('modalDarkmode')) {
+      color = "white";
+    } else {
+      color = "black";
+    }
+    return color;
+  }  
 }

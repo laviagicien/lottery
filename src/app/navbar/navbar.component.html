@@ -1,9 +1,9 @@
 <!-- Nav Bar -->
 <div class="navBar darkmode-ignore" style="margin-top: 0.5em;">
-        <div class="img">
+        <div class="img darkmode-ignore">
             <img id="logo" class="logo" src="./assets/image/logo_dofus.png" alt="logo_dofus">
         </div>
-        <div class="navBtn">
+        <div class="navBtn darkmode-ignore">
             <button type="button" class="btn1 btn btn-success" routerLink="list-creation">
                 Edition Liste
             </button>    
@@ -11,9 +11,9 @@
                 Lotterie
             </button>
         </div>
-        <div class="settings">
+        <div class="settings darkmode-ignore">
             <button type="button" class="btn btn-link setBtn" data-toggle="modal" data-target="#settingsModal"> 
-                <span class="setting-logo material-icons">
+                <span class="setting-logo material-icons" (click)="remPad()">
                     settings
                 </span>
             </button>
@@ -21,13 +21,14 @@
 </div>
 
 <!-- Modal for Settings -->
-<div class="modal fade" id="settingsModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+<div class="modal fade" id="settingsModal" data-backdrop="static" data-keyboard="false" 
+     tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true" style="padding-right: 0;">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-tittle" id="settingsModalLabel"> Param&egrave;tre </h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="material-icons modalClose" aria-hidden="true">
+                    <span class="material-icons modalClose" aria-hidden="true" [ngStyle]="{color: closeColor()}">
                         close
                     </span>
                   </button>
