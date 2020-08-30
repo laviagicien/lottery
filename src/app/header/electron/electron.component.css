@@ -1,10 +1,12 @@
 .header-nav {
     display: grid;
+    background-color: lightslategray !important;
     grid-template-columns: auto 65px;
     grid-template-rows: 35px;
-    background-color: lightslategray;
     padding-left: 5px;
     line-height: 35px;
+    position: relative;
+    z-index: 15;
 }
 
 .title {

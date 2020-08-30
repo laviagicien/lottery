@@ -16,7 +16,8 @@ export class LotteryComponent implements OnInit {
   ngOnInit() {
     this.show = this.participantService.getAllParticipant().length === 0 ? true : false;
     this.disabled = this.participantService.getAllParticipant().length === 0 ? true : false;
-
+    const body = document.getElementsByTagName('body').item(0);
+    const text = <HTMLElement>document.getElementById('noPart');
   }
 
   go() {

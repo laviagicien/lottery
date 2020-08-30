@@ -32,6 +32,7 @@ h1 {
     100% {color: red;}
 }
 
-.display--activated .text {
-    color: white;
+.text {
+    position: relative;
+    z-index: 15;
 }

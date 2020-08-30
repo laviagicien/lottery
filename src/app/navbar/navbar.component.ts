@@ -9,8 +9,8 @@ import * as $ from 'jquery';
 })
 export class NavbarComponent implements OnInit {
   darkmode = new Darkmode({
-    mixColor: '#f2f2f2',
-    backgroundColor: '#fff',
+    mixColor: '#ffffff',
+    backgroundColor: '#ffffff',
     saveInCookies : false
   });
 
@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   }
 
   darkMode() {
-    this.darkmode.toggle()
+    this.darkmode.toggle();
     const modal = document.getElementsByClassName('modal-content');
     modal.item(0).classList.toggle('modalDarkmode');
   }
