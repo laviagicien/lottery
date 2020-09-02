@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import  Darkmode  from 'darkmode-js';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +20,9 @@ export class NavbarComponent implements OnInit {
     if(this.darkmode.isActivated()) {
       tglBtn.checked = true;
     }
+    const layer = <HTMLElement>document.getElementsByClassName('darkmode-layer').item(0);
+    layer.style.zIndex = '10';
+
   }
 
   darkMode() {

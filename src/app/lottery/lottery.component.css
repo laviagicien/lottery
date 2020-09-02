@@ -36,3 +36,8 @@ h1 {
     position: relative;
     z-index: 15;
 }
+
+img, .darkmode-ignore {
+    position:relative;
+    z-index: 15
+}

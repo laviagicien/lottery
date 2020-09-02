@@ -1,8 +1,21 @@
-const {app, BrowserWindow} = require('electron');
+//Electron Related requirement
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
-
+const { generateKeyPairSync } = require('crypto');
+const { table } = require('console');
 let win;
+
+// Database Related requirement
+var knex = require('knex')(
+  { 
+    client: 'sqlite3',
+    connection : {
+      filename: path.join(__dirname, '/dist/lottery/data/settings.db')
+    }
+  }
+)
+
 
 function createWindow() {
     win = new BrowserWindow(
@@ -23,10 +36,20 @@ function createWindow() {
       })
     );
 
-    win.setResizable(false);
+    win.setResizable(false); //Avoid user to resize windoww
+
+    ipcMain.on('mainWindowLoaded', () => {
+      knex.schema.createTable('settings', table => (
+        table.increments('id'),
+        table.string('name'),
+        table.string('value')
+      ))
+    })
+
+    
 
     // The following is optional and will open the DevTools:
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     // close window
     win.on("closed", () => {
