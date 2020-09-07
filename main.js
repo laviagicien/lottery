@@ -2,26 +2,17 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
-const { generateKeyPairSync } = require('crypto');
-const { table } = require('console');
 const fs = require('fs');
 let win;
 
 // Database Related requirement
-
 var sqlite = require('sqlite3');
-const { detectBufferEncoding } = require('tslint/lib/utils');
-
-var knex = require('knex')(
-  { 
-    client: 'sqlite3',
-    connection: {
-      filename: path.join(__dirname, '/dist/lottery/data/settings.db')
-    },
-    useNullAsDefault: true
-  }
-)
-
+sqlite.verbose();
+let dbDir = path.join(__dirname, '/src/data');
+if(!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir)
+}
+let db = new sqlite.Database(path.join(dbDir, '/settings.db'));
 
 function createWindow() {
     win = new BrowserWindow(
@@ -41,34 +32,42 @@ function createWindow() {
         slashes: true
       })
     );
+    
 
     win.setResizable(false); //Avoid user to resize window
 
-    let dbDir = path.join(__dirname, '/dist/lottery/data');
-
-    if(!fs.existsSync(dbDir)) {
-      fs.mkdirSync(dbDir)
-    }
-
-    let db = new sqlite.Database(path.join(__dirname, '/dist/lottery/data/settings.db'));
-
-    db.run('CREATE TABLE IF NOT EXISTS settings (setting TEXT, value TEXT)');
-
     // The following is optional and will open the DevTools:
     win.webContents.openDevTools();
+
+    //INITIALIZE DB
+    db.serialize(() =>{
+      db.run('CREATE TABLE IF NOT EXISTS settings (setting TEXT PRIMARY KEY, value TEXT)');
+      db.run('INSERT OR IGNORE INTO settings (setting, value) VALUES ("darkmode", "0")');
+    });
 
     // close window
     win.on("closed", () => {
       win = null;
     });
-   
+    
+    ipcMain.on('initialize', (event, arg) => {
+      let query;
+      db.get('SELECT * FROM settings', (err, row) => {
+        query = row;
+        event.returnValue = query;
+      })
+    })
+
+    /* ipcMain.on('update-settings', (event, arg)=> {
+      console.log('data received : ' + arg)
+     }); */
   }
 
-  app.on('ready', createWindow);
-  
-  // on macOS, closing the window doesn't quit the app
-  app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-      app.quit();
-    }
-  });
+app.on('ready', createWindow);
+
+// on macOS, closing the window doesn't quit the app
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});
