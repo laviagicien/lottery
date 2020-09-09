@@ -82,7 +82,7 @@ function createWindow() {
   ipcMain.on('update-settings', (event, arg)=> {
     let pathToPaste = path.join(__dirname + "/dist/lottery/assets/image");
     let tmpLogoName = (newLogoPath.toString()).split('\\');
-    newLogoName = tmpLogoName[tmpLogoName.length - 1];
+    newLogoName = tmpLogoName[tmpLogoName.length - 1].toString();
     if (!fs.existsSync(path.join(pathToPaste + "/" + newLogoName))) {
       fs.copyFile(newLogoPath.toString(), path.join(pathToPaste + "/" + newLogoName), (err) => {
         if(err) {
@@ -109,7 +109,7 @@ function createWindow() {
     function setCurrentLogoName (value) {
       let currentLogoName = value;
       if(newLogoName !== "" && newLogoName !== currentLogoName) {
-        db.run('UPDATE settings SET value = ' + newLogoName + ' WHERE setting = "imgSel"');
+        db.run('UPDATE settings SET value = "' + newLogoName + '" WHERE setting = "imgSel"');
         event.reply('settings-saved', newLogoName);
       } else {
         event.reply('settings-saved', currentLogoName);

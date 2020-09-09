@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
 
   logoPath: String = "";
 
-  isChecked = true;
+  isChecked = false;
 
   constructor(private electron: ElectronService) { }
 
@@ -34,16 +34,14 @@ export class NavbarComponent implements OnInit {
     if(this.darkmodeStatus) {
       this.darkmode.toggle();
       const modal = document.getElementsByClassName('modal-content');
-      modal.item(0).classList.toggle('modalDarkmode')
+      modal.item(0).classList.toggle('modalDarkmode');
       this.isChecked = true;
     }
-    console.log(this.isChecked);
     this.logoPath = this.settings.find((row) => {
       return row.setting == 'imgSel';
     }).value;
     const layer = <HTMLElement>document.getElementsByClassName('darkmode-layer').item(0);
     layer.style.zIndex = '10';
-
   }
 
   darkMode(settingsForm: NgForm) {
@@ -69,7 +67,7 @@ export class NavbarComponent implements OnInit {
   updateSettings() {
     this.electron.ipcRenderer.send('update-settings');
     this.electron.ipcRenderer.on('settings-saved', (event, arg) => {
-      console.log(arg);
+      document.getElementById('logo').setAttribute('src', ('./assets/image/' + arg));
     });
   }
 

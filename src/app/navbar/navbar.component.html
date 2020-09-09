@@ -39,7 +39,7 @@
                     <div class="label">Dark Mode</div>
                     <div class="set">
                         <label class = "switch" for="darkMode">
-                            <input type="checkbox" name="darkMode" checked id="darkMode" ngModel>
+                            <input type="checkbox" name="darkMode" id="darkMode" [(ngModel)]="isChecked">
                             <span class="slider" (click)="darkMode(settingsForm)"></span>
                         </label>
                     </div>
