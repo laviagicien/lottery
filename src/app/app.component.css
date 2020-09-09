@@ -9,3 +9,7 @@ body.modal-open {
     overflow: auto!important;
     padding: 0px!important;
 }
+
+.darkmode-layer {
+    z-index: 10;
+}

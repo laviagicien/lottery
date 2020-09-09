@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import  Darkmode  from 'darkmode-js';
 import { ElectronService } from '../electron.service';
+import { NgForm } from '@angular/forms';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-navbar',
@@ -18,30 +20,39 @@ export class NavbarComponent implements OnInit {
 
   darkmodeStatus: Boolean = false;
 
+  logoPath: String = "";
+
+  isChecked = true;
+
   constructor(private electron: ElectronService) { }
 
   ngOnInit() {
-    this.settings.push(this.electron.ipcRenderer.sendSync('initialize'));
+    this.settings = this.electron.ipcRenderer.sendSync('initialize');
     this.darkmodeStatus = !!+this.settings.find((row)=> {
-      return row.setting === 'darkmode'; 
+      return row.setting == 'darkmode'; 
     }).value;
     if(this.darkmodeStatus) {
       this.darkmode.toggle();
+      const modal = document.getElementsByClassName('modal-content');
+      modal.item(0).classList.toggle('modalDarkmode')
+      this.isChecked = true;
     }
-    
-    const tglBtn = <HTMLInputElement>document.getElementById('darkMode');
-    if(this.darkmode.isActivated()) {
-      tglBtn.checked = true;
-    }
+    console.log(this.isChecked);
+    this.logoPath = this.settings.find((row) => {
+      return row.setting == 'imgSel';
+    }).value;
     const layer = <HTMLElement>document.getElementsByClassName('darkmode-layer').item(0);
     layer.style.zIndex = '10';
 
   }
 
-  darkMode() {
+  darkMode(settingsForm: NgForm) {
     this.darkmode.toggle();
     const modal = document.getElementsByClassName('modal-content');
     modal.item(0).classList.toggle('modalDarkmode');
+    let tmpDarkmode = !settingsForm.value.darkMode ? "1"  : "0";
+    console.log(tmpDarkmode)
+    this.electron.ipcRenderer.send('set-darkmode', tmpDarkmode)
     
   }
 
@@ -56,6 +67,16 @@ export class NavbarComponent implements OnInit {
   }
   
   updateSettings() {
-    this.electron.ipcRenderer.send('update-settings', )
+    this.electron.ipcRenderer.send('update-settings');
+    this.electron.ipcRenderer.on('settings-saved', (event, arg) => {
+      console.log(arg);
+    });
+  }
+
+  chooseAFile() {
+    const path: String[]= this.electron.ipcRenderer.sendSync('choose-file')
+    const cutPath = path[0].split('\\')
+    const imgPath = cutPath[cutPath.length - 1]
+    $('.imgPath').html(imgPath)
   }
 }

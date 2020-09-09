@@ -1,7 +1,7 @@
 <!-- Nav Bar -->
 <div class="navBar darkmode-ignore" style="margin-top: 0.5em;">
         <div class="img darkmode-ignore">
-            <img id="logo" class="logo" src="./assets/image/logo_dofus.png" alt="logo_dofus">
+            <img id="logo" class="logo" src="./assets/image/{{ logoPath }}" alt="logo_dofus">
         </div>
         <div class="navBtn darkmode-ignore">
             <button type="button" class="btn1 btn btn-success" routerLink="list-creation">
@@ -36,19 +36,27 @@
             <div class="modal-body">
                 <form #settingsForm="ngForm">
                     <!-- Dark Mode -->
-                    <span class="label">Dark Mode</span>
-                    <label class = "switch" for="darkMode">
-                        <input type="checkbox" name="darkMode" id="darkMode">
-                        <span class="slider" (click)="darkMode()"></span>
-                    </label>
+                    <div class="label">Dark Mode</div>
+                    <div class="set">
+                        <label class = "switch" for="darkMode">
+                            <input type="checkbox" name="darkMode" checked id="darkMode" ngModel>
+                            <span class="slider" (click)="darkMode(settingsForm)"></span>
+                        </label>
+                    </div>
+                    
                     
                     <!-- Image Selection -->
-                    <span class="label">Image Selection (comming soon)</span>
+                    <div class="label">Image Selection</div>
+                    <div class="set">
+                            <span class="imgPath">Choix du logo </span>
+                            <button type="button" class="btn btn-secondary" 
+                                    (click)="chooseAFile()">Select</button>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateSettings(settingsForm)">Enregistrer</button>
             </div>
         </div>
     </div>

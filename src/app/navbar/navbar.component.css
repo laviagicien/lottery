@@ -57,15 +57,16 @@
 /*Form style*/
 form {
     display: grid;
-    grid-template-columns: 75% 1fr;
+    grid-template-columns: 50% 1fr;
 }
 
 .label {
     grid-column: 1 / 2; 
 }
 
-input[type="checkbox"] {
+.set {
     grid-column: 2/3;
+    justify-self: end;
 }
 
 .switch {
