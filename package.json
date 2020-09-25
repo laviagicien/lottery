@@ -34,7 +34,7 @@
     "bootstrap": "^4.4.1",
     "browserfs": "^1.4.3",
     "darkmode-js": "^1.5.6",
-    "electron-rebuild": "^2.0.1",
+    "electron-is-dev": "^1.2.0",
     "file-system": "^2.2.2",
     "global": "^4.4.0",
     "is-electron": "^2.2.0",
@@ -59,6 +59,7 @@
     "codelyzer": "^5.0.0",
     "electron": "^9.0.2",
     "electron-builder": "^22.7.0",
+    "electron-rebuild": "^2.0.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^5.0.9",
@@ -76,6 +77,14 @@
       "*.js",
       "dist/lottery",
       "node_modules"
+    ],
+    "extraResources": [
+      "src/assets"
+    ],
+    "asar": "true", 
+    "asarUnpack":[
+      "src/assets/data/settings.db",
+      "src/assets/image/logo_dofus_w.png"
     ]
   }
 }

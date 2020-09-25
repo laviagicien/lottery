@@ -3,16 +3,23 @@ const {app, BrowserWindow, ipcMain, dialog} = require('electron');
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
+const isDev = require('electron-is-dev')
 let win;
+
+// Default path for image and database
+let defPath
+if (isDev) {
+  defPath = path.join(app.getAppPath(), '/dist/lottery/assets');
+} else {
+  defPath = path.join(app.getAppPath(), '..', '..', 'resources', 'src', 'assets')
+}
 
 // Database Related requirement
 var sqlite = require('sqlite3');
 sqlite.verbose();
-let dbDir = path.join(__dirname, '/src/data');
-if(!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir)
-}
-let db = new sqlite.Database(path.join(dbDir, '/settings.db'));
+let dbDir = path.join(defPath, 'data');
+
+let db = new sqlite.Database(dbDir + '/settings.db');
 
 function createWindow() {
   win = new BrowserWindow(
@@ -37,12 +44,12 @@ function createWindow() {
   win.setResizable(false); //Avoid user to resize window
 
   // The following is optional and will open the DevTools:
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   //INITIALIZE DB
   db.serialize(() =>{
     db.run('CREATE TABLE IF NOT EXISTS settings (setting TEXT PRIMARY KEY, value TEXT)');
-    db.run('INSERT OR IGNORE INTO settings (setting, value) VALUES ("darkmode", "0"), ("imgSel", "logo_dofus.png")');
+    db.run('INSERT OR IGNORE INTO settings (setting, value) VALUES ("darkmode", "0"), ("imgSel", "logo_dofus_w.png")');
   });
 
   // close window
@@ -65,7 +72,7 @@ function createWindow() {
   ipcMain.on('choose-file', (event, arg) => {
      let logoPath = dialog.showOpenDialogSync({
       title: 'Choix du logo',
-      defaultPath: (__dirname + "dist\\lottery\\assets\\image"),
+      defaultPath: (defPath + "\\image"),
       filters: [{name : 'Images', extensions: ['jpg', 'png', 'gif']}],
       properties : [
         'openFile'
@@ -80,11 +87,11 @@ function createWindow() {
   });
 
   ipcMain.on('update-settings', (event, arg)=> {
-    let pathToPaste = path.join(__dirname + "/dist/lottery/assets/image");
+    let pathToPaste = path.join(defPath, 'image');
     let tmpLogoName = (newLogoPath.toString()).split('\\');
     newLogoName = tmpLogoName[tmpLogoName.length - 1].toString();
     if (!fs.existsSync(path.join(pathToPaste + "/" + newLogoName))) {
-      fs.copyFile(newLogoPath.toString(), path.join(pathToPaste + "/" + newLogoName), (err) => {
+      fs.copyFile(newLogoPath.toString(), path.join(pathToPaste, newLogoName), (err) => {
         if(err) {
           throw err
         }
@@ -103,7 +110,7 @@ function createWindow() {
     function setCurrentDarkmode (arg, value) {
       let currentDarkmode = value;
       if(darkmodeSet !== "" && darkmodeSet !== currentDarkmode) {
-        db.run('UPDATE settings SET value = ' + darkmodeSet + ' WHERE setting = "darkmode"');
+        db.run('UPDATE settings SET value = "' + darkmodeSet + '" WHERE setting = "darkmode"');
       }
     }
     function setCurrentLogoName (value) {
