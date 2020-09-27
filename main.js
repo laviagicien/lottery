@@ -23,15 +23,15 @@ let db = new sqlite.Database(dbDir + '/settings.db');
 
 function createWindow() {
   win = new BrowserWindow(
-    { 
-      width: 1020, 
+    {
+      width: 1020,
       height: 650,
       frame: false,
       webPreferences: {
         nodeIntegration: true,
-      } 
+      }
     });
-  
+
   win.loadURL(
     url.format({
       pathname: path.join(__dirname, `/dist/lottery/index.html`),
@@ -39,7 +39,7 @@ function createWindow() {
       slashes: true
     })
   );
-  
+
 
   win.setResizable(false); //Avoid user to resize window
 
@@ -56,7 +56,7 @@ function createWindow() {
   win.on("closed", () => {
     win = null;
   });
-  
+
   ipcMain.on('initialize', (event, arg) => {
     let query;
     db.all('SELECT * FROM settings', (err, row) => {
@@ -88,7 +88,7 @@ function createWindow() {
 
   ipcMain.on('update-settings', (event, arg)=> {
     let pathToPaste = path.join(defPath, 'image');
-    let tmpLogoName = (newLogoPath.toString()).split('\\');
+    let tmpLogoName = (newLogoPath.toString()).replace('\\', '/').split('/');
     newLogoName = tmpLogoName[tmpLogoName.length - 1].toString();
     if (!fs.existsSync(path.join(pathToPaste + "/" + newLogoName))) {
       fs.copyFile(newLogoPath.toString(), path.join(pathToPaste, newLogoName), (err) => {
@@ -124,7 +124,7 @@ function createWindow() {
 
     }
 
-    
+
   });
 }
 

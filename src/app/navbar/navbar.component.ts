@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.settings = this.electron.ipcRenderer.sendSync('initialize');
     this.darkmodeStatus = !!+this.settings.find((row)=> {
-      return row.setting == 'darkmode'; 
+      return row.setting == 'darkmode';
     }).value;
     if(this.darkmodeStatus) {
       this.darkmode.toggle();
@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit {
     let tmpDarkmode = !settingsForm.value.darkMode ? "1"  : "0";
     console.log(tmpDarkmode)
     this.electron.ipcRenderer.send('set-darkmode', tmpDarkmode)
-    
+
   }
 
   closeColor(): String{
@@ -63,7 +63,7 @@ export class NavbarComponent implements OnInit {
     }
     return color;
   }
-  
+
   updateSettings() {
     this.electron.ipcRenderer.send('update-settings');
     this.electron.ipcRenderer.on('settings-saved', (event, arg) => {
@@ -73,8 +73,7 @@ export class NavbarComponent implements OnInit {
 
   chooseAFile() {
     const path: String[]= this.electron.ipcRenderer.sendSync('choose-file')
-    const cutPath = path[0].split('\\')
-    const imgPath = cutPath[cutPath.length - 1]
+    const imgPath = path[0].replace('\\', '/').split('/').pop()
     $('.imgPath').html(imgPath)
   }
 }
