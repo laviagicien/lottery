@@ -41,3 +41,16 @@ img, .darkmode-ignore {
     position:relative;
     z-index: 15
 }
+
+.slider-text {
+    position: relative;
+    width: 99%;
+    color: black;
+    font-weight: bolder;
+    animation: slideText 15s linear infinite;
+}
+
+@keyframes slideText {
+    0% {transform: translateX(100%);} 
+    100% {transform: translateX(-100%);} 
+}

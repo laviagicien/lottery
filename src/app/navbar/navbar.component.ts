@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
-import  Darkmode  from 'darkmode-js';
+import Darkmode from 'darkmode-js';
 import { ElectronService } from '../electron.service';
 import { NgForm } from '@angular/forms';
 import * as $ from 'jquery';
@@ -18,9 +18,9 @@ export class NavbarComponent implements OnInit {
 
   settings: {setting: string, value: string}[] = [];
 
-  darkmodeStatus: Boolean = false;
+  darkmodeStatus = false;
 
-  logoPath: String = "";
+  logoPath = '';
 
   isChecked = false;
 
@@ -28,19 +28,19 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.settings = this.electron.ipcRenderer.sendSync('initialize');
-    this.darkmodeStatus = !!+this.settings.find((row)=> {
-      return row.setting == 'darkmode';
+    this.darkmodeStatus = !!+this.settings.find((row) => {
+      return row.setting === 'darkmode';
     }).value;
-    if(this.darkmodeStatus) {
+    if (this.darkmodeStatus) {
       this.darkmode.toggle();
       const modal = document.getElementsByClassName('modal-content');
       modal.item(0).classList.toggle('modalDarkmode');
       this.isChecked = true;
     }
     this.logoPath = this.settings.find((row) => {
-      return row.setting == 'imgSel';
+      return row.setting === 'imgSel';
     }).value;
-    const layer = <HTMLElement>document.getElementsByClassName('darkmode-layer').item(0);
+    const layer = document.getElementsByClassName('darkmode-layer').item(0) as HTMLElement;
     layer.style.zIndex = '10';
   }
 
@@ -48,18 +48,17 @@ export class NavbarComponent implements OnInit {
     this.darkmode.toggle();
     const modal = document.getElementsByClassName('modal-content');
     modal.item(0).classList.toggle('modalDarkmode');
-    let tmpDarkmode = !settingsForm.value.darkMode ? "1"  : "0";
-    console.log(tmpDarkmode)
-    this.electron.ipcRenderer.send('set-darkmode', tmpDarkmode)
+    const tmpDarkmode = !settingsForm.value.darkMode ? '1'  : '0';
+    this.electron.ipcRenderer.send('set-darkmode', tmpDarkmode);
 
   }
 
-  closeColor(): String{
-    let color: String;
-    if(document.getElementsByClassName('modal-content').item(0).classList.contains('modalDarkmode')) {
-      color = "white";
+  closeColor(): string {
+    let color: string;
+    if (document.getElementsByClassName('modal-content').item(0).classList.contains('modalDarkmode')) {
+      color = 'white';
     } else {
-      color = "black";
+      color = 'black';
     }
     return color;
   }
@@ -72,8 +71,8 @@ export class NavbarComponent implements OnInit {
   }
 
   chooseAFile() {
-    const path: String[]= this.electron.ipcRenderer.sendSync('choose-file')
-    const imgPath = path[0].replace('\\', '/').split('/').pop()
-    $('.imgPath').html(imgPath)
+    const path: string[] = this.electron.ipcRenderer.sendSync('choose-file');
+    const imgPath = path[0].replace('\\', '/').split('/').pop();
+    $('.imgPath').html(imgPath);
   }
 }

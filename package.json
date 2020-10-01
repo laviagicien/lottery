@@ -33,7 +33,7 @@
     "angular": "^1.7.9",
     "bootstrap": "^4.4.1",
     "browserfs": "^1.4.3",
-    "darkmode-js": "^1.5.6",
+    "darkmode-js": "^1.5.7",
     "electron-is-dev": "^1.2.0",
     "file-system": "^2.2.2",
     "global": "^4.4.0",
@@ -81,8 +81,8 @@
     "extraResources": [
       "src/assets"
     ],
-    "asar": "true", 
-    "asarUnpack":[
+    "asar": "true",
+    "asarUnpack": [
       "src/assets/data/settings.db",
       "src/assets/image/logo_dofus_w.png"
     ]
