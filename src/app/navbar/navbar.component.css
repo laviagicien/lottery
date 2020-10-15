@@ -1,7 +1,7 @@
 .navBar {
     display: grid;
     grid-template-columns: 100px auto 100px;
-    grid-template-rows: 80px;
+    grid-template-rows: 80px
 }
 
 .img .logo {
@@ -58,6 +58,7 @@
 form {
     display: grid;
     grid-template-columns: 50% 1fr;
+    row-gap: 15px;
 }
 
 .label {
