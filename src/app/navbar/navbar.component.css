@@ -43,6 +43,12 @@
 
 .btn2 {
     margin-left: 1.25em;
+    margin-right: 1.25em;
+    width: 10em;
+}
+
+.btn3 {
+    margin-left: 1.25em;
     width: 10em;
 }
 

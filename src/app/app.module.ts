@@ -9,6 +9,7 @@ import { LotteryComponent } from './lottery/lottery.component';
 import { ParticipantService } from './participant.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ElectronComponent } from './header/electron/electron.component';
+import { WinnersListComponent } from './winners-list/winners-list.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ElectronComponent } from './header/electron/electron.component';
     ListCreationComponent,
     LotteryComponent,
     NavbarComponent,
-    ElectronComponent
+    ElectronComponent,
+    WinnersListComponent
   ],
   imports: [
     BrowserModule,

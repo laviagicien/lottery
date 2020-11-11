@@ -1,0 +1,19 @@
+.head {
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.winner, .date, .prize {
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.winner, .date {
+    border-right: 1px solid black;
+}
+
+.date, .prize {
+    border-left : 1px solid black;
+}
+

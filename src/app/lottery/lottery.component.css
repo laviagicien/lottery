@@ -42,15 +42,19 @@ img, .darkmode-ignore {
     z-index: 15
 }
 
+.slider-text-container {
+    overflow: hidden;
+}
+
 .slider-text {
+    display: inline-block;
     position: relative;
-    width: 99%;
     color: black;
     font-weight: bolder;
     animation: slideText 15s linear infinite;
 }
 
 @keyframes slideText {
-    0% {transform: translateX(100%);} 
-    100% {transform: translateX(-100%);} 
+    0% {transform: translateX(200%);} 
+    100% {transform: translateX(-200%);} 
 }
