@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ElectronService } from '../electron.service';
 import { Winner } from '../winner.model';
 
 @Component({
@@ -14,7 +15,7 @@ export class WinnersListComponent implements OnInit {
     new Winner("date3", "name3", "prize3")
   ];
   
-  constructor() { }
+  constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
 

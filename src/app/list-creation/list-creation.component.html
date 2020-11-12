@@ -2,7 +2,8 @@
     <div class="row prizeRow">
         <div class="col text-center ">
             <label for="prize"> <h5>Gain : &nbsp;</h5></label>
-            <input type="text" name="prize" id="prize" [(ngModel)]="prize">
+            <input type="text" name="prize" id="prize" placeholder="Insérer et Valider"
+                   [(ngModel)]="prize" (keydown.enter)="addPrize()">
             <button class="btn btn-success btn-sm my-auto"
                     style="margin-left: 1em;" 
                     (click)="addPrize()">

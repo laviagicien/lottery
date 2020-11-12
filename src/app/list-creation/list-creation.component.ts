@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParticipantService } from '../participant.service';
 import { Participant } from '../participant.model';
+import { ElectronService } from '../electron.service';
 
 @Component({
   selector: 'app-list-creation',
@@ -9,12 +10,14 @@ import { Participant } from '../participant.model';
 })
 export class ListCreationComponent implements OnInit {
 
-  prize: string="Insérer le Gain et Valider";
+  prize: string;
 
-  constructor(private participantService: ParticipantService) { }
+  constructor(private participantService: ParticipantService,
+              private electronService: ElectronService) { }
 
   ngOnInit() {
     (document.getElementById('name') as HTMLInputElement).focus();
+    this.prize = this.electronService.ipcRenderer.sendSync('get-prize');
   }
 
   addParticipant() {
@@ -58,6 +61,6 @@ export class ListCreationComponent implements OnInit {
   }
 
   addPrize() {
-    console.log(this.prize);
+    this.electronService.ipcRenderer.send('set-prize', this.prize);
   }
 }

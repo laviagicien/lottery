@@ -9,7 +9,8 @@ let win;
 // Default path for image and database
 let defPath
 if (isDev) {
-  defPath = path.join(app.getAppPath(), '/dist/lottery/assets');
+  defPath = path.join(app.getAppPath(), 'src/assets');
+  console.log(defPath);
 } else {
   defPath = path.join(app.getAppPath(), '..', '..', 'resources', 'src', 'assets')
 }
@@ -24,8 +25,8 @@ let db = new sqlite.Database(dbDir + '/settings.db');
 function createWindow() {
   win = new BrowserWindow(
     {
-      width: 1020,
-      height: 650,
+      width: 1280,
+      height: 768,
       frame: false,
       webPreferences: {
         nodeIntegration: true,
@@ -50,7 +51,7 @@ function createWindow() {
   db.serialize(() =>{
     db.run('CREATE TABLE IF NOT EXISTS settings (setting TEXT PRIMARY KEY, value TEXT)');
     db.run('INSERT OR IGNORE INTO settings (setting, value) VALUES ("darkmode", "0"), ("imgSel", "logo_dofus_w.png")');
-    db.run('CREATE TABLE IF NOT EXISTS winners (date DATE, winner TEXT PRIMARY KEY, prize TEXT)')
+    db.run('CREATE TABLE IF NOT EXISTS winners (date TEXT, winner TEXT PRIMARY KEY, prize TEXT)');
   });
 
   // close window
@@ -109,7 +110,7 @@ function createWindow() {
       db.get('SELECT value FROM settings WHERE setting = "imgSel"', (err, row) => {
         setCurrentLogoName(row.value);
       });
-    })
+    });
     function setCurrentDarkmode (arg, value) {
       let currentDarkmode = value;
       if(darkmodeSet !== "" && darkmodeSet !== currentDarkmode) {
@@ -126,9 +127,18 @@ function createWindow() {
       }
 
     }
-
-
   });
+
+  /* Winner related programming */
+  ipcMain.on('set-prize', (event, arg) => {
+    prize = arg;
+    console.log('le lot : ' + prize);
+  })
+
+  ipcMain.on('get-prize', (event, arg) => {
+    event.returnValue = prize;
+  })
+
 }
 
 app.on('ready', createWindow);
