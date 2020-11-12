@@ -50,6 +50,7 @@ function createWindow() {
   db.serialize(() =>{
     db.run('CREATE TABLE IF NOT EXISTS settings (setting TEXT PRIMARY KEY, value TEXT)');
     db.run('INSERT OR IGNORE INTO settings (setting, value) VALUES ("darkmode", "0"), ("imgSel", "logo_dofus_w.png")');
+    db.run('CREATE TABLE IF NOT EXISTS winners (date DATE, winner TEXT PRIMARY KEY, prize TEXT)')
   });
 
   // close window
@@ -68,6 +69,8 @@ function createWindow() {
   let newLogoPath = "";
   let newLogoName = "";
   let darkmodeSet = "";
+  let winner = "";
+  let prize = "";
 
   ipcMain.on('choose-file', (event, arg) => {
      let logoPath = dialog.showOpenDialogSync({

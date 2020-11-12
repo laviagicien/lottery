@@ -9,6 +9,8 @@ import { Participant } from '../participant.model';
 })
 export class ListCreationComponent implements OnInit {
 
+  prize: string="Insérer le Gain et Valider";
+
   constructor(private participantService: ParticipantService) { }
 
   ngOnInit() {
@@ -53,5 +55,9 @@ export class ListCreationComponent implements OnInit {
 
   getAllParticipant() {
     return this.participantService.getAllParticipant();
+  }
+
+  addPrize() {
+    console.log(this.prize);
   }
 }

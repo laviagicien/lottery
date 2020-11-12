@@ -1,4 +1,18 @@
 <div class="container">
+    <div class="row prizeRow">
+        <div class="col text-center ">
+            <label for="prize"> <h5>Gain : &nbsp;</h5></label>
+            <input type="text" name="prize" id="prize" [(ngModel)]="prize">
+            <button class="btn btn-success btn-sm my-auto"
+                    style="margin-left: 1em;" 
+                    (click)="addPrize()">
+                        <i class="material-icons align-middle">
+                            check
+                        </i>
+            </button>
+        </div>
+        
+    </div>
     <!--En-tête-->
     <div class="row">
         <div class="col-4 offset-md-2 border-bottom border-right">

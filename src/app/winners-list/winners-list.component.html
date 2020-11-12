@@ -1,17 +1,27 @@
 <div class="container">
     <div class="head">
-        <div class="winner">
-            <h5>Gagnant</h5>
-        </div>
-        <div class="date">
+        <div class="date border-bottom border-right">
             <h5>Date</h5>
         </div>
-        <div class="prize">
+        <div class="winner border-bottom border-right">
+            <h5>Gagnant</h5>
+        </div>
+        <div class="prize border-bottom">
             <h5>Gain</h5>
         </div>
     </div>
     <div class="body">
-
+        <div class="winRow" *ngFor="let row of winnersColl">
+            <div class="dateR">
+                <h5>{{row.date}}</h5>
+            </div>
+            <div class="winnerR">
+                <h5>{{row.name}}</h5>
+            </div>
+            <div class="prizeR">
+                <h5>{{row.prize}}</h5>
+            </div>
+        </div>
     </div>
     
 </div>

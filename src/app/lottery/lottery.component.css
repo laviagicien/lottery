@@ -37,19 +37,14 @@ h1 {
     z-index: 15;
 }
 
-img, .darkmode-ignore {
-    position:relative;
-    z-index: 15
-}
-
 .slider-text-container {
+    position: relative;
     overflow: hidden;
 }
 
 .slider-text {
     display: inline-block;
     position: relative;
-    color: black;
     font-weight: bolder;
     animation: slideText 15s linear infinite;
 }

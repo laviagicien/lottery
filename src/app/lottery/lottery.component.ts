@@ -37,6 +37,8 @@ export class LotteryComponent implements OnInit {
     this.winner(listParticipant).then(() => {
       this.displayPlayer = listParticipant[winPos];
       this.reveal();
+      /* sending winer name to electron */
+      
     });
   }
 

@@ -3,17 +3,25 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+.winRow {
+    margin-top:1%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 
 .winner, .date, .prize {
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
     text-align: center;
 }
 
 .winner, .date {
-    border-right: 1px solid black;
+   /*  border-right: 1px solid black; */
 }
 
-.date, .prize {
-    border-left : 1px solid black;
+.winner, .prize {
+  /*   border-left : 1px solid black; */
 }
 
+.winnerR, .dateR, .prizeR {
+    text-align: center;
+}
