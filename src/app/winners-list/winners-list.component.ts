@@ -21,4 +21,9 @@ export class WinnersListComponent implements OnInit {
 
   }
   
+  deleteWinner(i: number) {
+    this.winnersColl.splice(i, 1);
+  }
+
+
 }

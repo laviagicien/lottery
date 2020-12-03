@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParticipantService } from '../participant.service';
 import { Participant } from '../participant.model';
+import { ElectronService } from '../electron.service';
 
 @Component({
   selector: 'app-lottery',
@@ -11,7 +12,8 @@ export class LotteryComponent implements OnInit {
   show: boolean;
   disabled: boolean;
   displayPlayer = 'Player';
-  constructor(private participantService: ParticipantService) {}
+  constructor(private participantService: ParticipantService, 
+              private electron: ElectronService) {}
 
   ngOnInit() {
     this.show = this.participantService.getAllParticipant().length === 0 ? true : false;
@@ -36,8 +38,10 @@ export class LotteryComponent implements OnInit {
     const winPos = Math.floor(Math.random() * (listParticipant.length + 1));
     this.winner(listParticipant).then(() => {
       this.displayPlayer = listParticipant[winPos];
+      let electronWinner = this.displayPlayer;
       this.reveal();
       /* sending winer name to electron */
+      this.electron.ipcRenderer.send('lottery-is-done', electronWinner);
       
     });
   }

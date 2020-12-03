@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="body">
-        <div class="winRow" *ngFor="let row of winnersColl">
+        <div class="winRow" *ngFor="let row of winnersColl, let i=index">
             <div class="dateR">
                 <h5>{{row.date}}</h5>
             </div>
@@ -20,6 +20,14 @@
             </div>
             <div class="prizeR">
                 <h5>{{row.prize}}</h5>
+            </div>
+            <div class="delete">
+                <button class="btn btn-danger btn-sm my-auto"
+                        (click)="deleteWinner(i)">
+                    <i class="material-icons align-middle">
+                        close
+                    </i>
+                </button>
             </div>
         </div>
     </div>

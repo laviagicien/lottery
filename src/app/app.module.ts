@@ -10,6 +10,7 @@ import { ParticipantService } from './participant.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ElectronComponent } from './header/electron/electron.component';
 import { WinnersListComponent } from './winners-list/winners-list.component';
+import { ElectronService } from './electron.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { WinnersListComponent } from './winners-list/winners-list.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [ParticipantService],
+  providers: [ParticipantService,
+              ElectronService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,6 +11,10 @@
                             check
                         </i>
             </button>
+            <br>
+            <h5 style="color: green;" *ngIf="prizeValidation else nthg">Le gain est enregistr&eacute;</h5>
+            <ng-template #nthg>
+            </ng-template>
         </div>
         
     </div>

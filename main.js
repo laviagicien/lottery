@@ -15,11 +15,16 @@ if (isDev) {
   defPath = path.join(app.getAppPath(), '..', '..', 'resources', 'src', 'assets')
 }
 
+//creation of data directory
+
+if (!fs.existsSync(path.join(defPath, 'data'))) {
+  fs.mkdirSync(path.join(defPath, 'data'));
+}
+
 // Database Related requirement
 var sqlite = require('sqlite3');
 sqlite.verbose();
 let dbDir = path.join(defPath, 'data');
-
 let db = new sqlite.Database(dbDir + '/settings.db');
 
 function createWindow() {
@@ -51,7 +56,7 @@ function createWindow() {
   db.serialize(() =>{
     db.run('CREATE TABLE IF NOT EXISTS settings (setting TEXT PRIMARY KEY, value TEXT)');
     db.run('INSERT OR IGNORE INTO settings (setting, value) VALUES ("darkmode", "0"), ("imgSel", "logo_dofus_w.png")');
-    db.run('CREATE TABLE IF NOT EXISTS winners (date TEXT, winner TEXT PRIMARY KEY, prize TEXT)');
+    db.run('CREATE TABLE IF NOT EXISTS winners (id INTEGER PRIMARY KEY, date TEXT, winner TEXT, prize TEXT)');
   });
 
   // close window
@@ -66,6 +71,10 @@ function createWindow() {
       event.returnValue = query;
     })
   })
+
+  /***********************************
+   * Variables coming from Renderer * 
+   ***********************************/
 
   let newLogoPath = "";
   let newLogoName = "";
@@ -132,11 +141,17 @@ function createWindow() {
   /* Winner related programming */
   ipcMain.on('set-prize', (event, arg) => {
     prize = arg;
-    console.log('le lot : ' + prize);
   })
 
   ipcMain.on('get-prize', (event, arg) => {
     event.returnValue = prize;
+  })
+
+  ipcMain.on('lottery-is-done', (event, arg) => {
+    winner = arg
+    console.log('le lot : ' + prize);
+    console.log('winner is : ' + winner)
+    db.run('INSERT INTO winners (date, winner, prize) VALUES (date("now"), "' + winner + '", "' + prize  + '")')
   })
 
 }

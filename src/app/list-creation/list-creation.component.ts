@@ -11,6 +11,7 @@ import { ElectronService } from '../electron.service';
 export class ListCreationComponent implements OnInit {
 
   prize: string;
+  prizeValidation: boolean;
 
   constructor(private participantService: ParticipantService,
               private electronService: ElectronService) { }
@@ -62,5 +63,6 @@ export class ListCreationComponent implements OnInit {
 
   addPrize() {
     this.electronService.ipcRenderer.send('set-prize', this.prize);
+    this.prizeValidation = this.prize.length !== 0 ? true : false; 
   }
 }
