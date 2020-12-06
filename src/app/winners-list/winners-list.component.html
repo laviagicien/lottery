@@ -11,19 +11,19 @@
         </div>
     </div>
     <div class="body">
-        <div class="winRow" *ngFor="let row of winnersColl, let i=index">
+        <div class="winRow" *ngFor="let row of winnersColl">
             <div class="dateR">
-                <h5>{{row.date}}</h5>
+                <h5>{{row.getDate()}}</h5>
             </div>
             <div class="winnerR">
-                <h5>{{row.name}}</h5>
+                <h5>{{row.getName()}}</h5>
             </div>
             <div class="prizeR">
-                <h5>{{row.prize}}</h5>
+                <h5>{{row.getPrize()}}</h5>
             </div>
             <div class="delete">
                 <button class="btn btn-danger btn-sm my-auto"
-                        (click)="deleteWinner(i)">
+                        (click)="deleteWinner(row.getIndex())">
                     <i class="material-icons align-middle">
                         close
                     </i>

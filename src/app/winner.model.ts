@@ -1,12 +1,28 @@
 export class Winner {
-    public name: string;
-    public date: string;
-    public prize: string;
+    private index: number;
+    private name: string;
+    private date: string;
+    private prize: string;
 
-    constructor (d: string, n:string, p:string) {
+    constructor (i: number, d: string, n:string, p:string) {
+        this.index = i;
         this.name = n;
         this.date = d;
         this.prize = p;
+    }
+
+    getIndex() {
+        return this.index;
+    }
+
+    getName() {
+        return this.name;
+    }
+    getDate() {
+        return this.date;
+    }
+    getPrize() {
+        return this.prize;
     }
 
     getFullInfo () {

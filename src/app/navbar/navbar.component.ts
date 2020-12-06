@@ -69,4 +69,14 @@ export class NavbarComponent implements OnInit {
   darkmodeToggle() {
     document.getElementsByTagName('body').item(0).classList.toggle('darkmode');
   }
+
+  deleteDB() {
+    this.electron.ipcRenderer.send('delete-winner-db');
+    this.electron.ipcRenderer.on('winner-db-deleted', async () => {
+      const delay = async (ms: number) => new Promise(res => setTimeout(res, ms));
+      document.getElementsByClassName('st0').item(0).classList.toggle('dash');
+      await delay(2500);
+      document.getElementsByClassName('st0').item(0).classList.toggle('dash');
+    })
+  }
 }

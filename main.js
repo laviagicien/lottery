@@ -10,7 +10,6 @@ let win;
 let defPath
 if (isDev) {
   defPath = path.join(app.getAppPath(), 'src/assets');
-  console.log(defPath);
 } else {
   defPath = path.join(app.getAppPath(), '..', '..', 'resources', 'src', 'assets')
 }
@@ -138,7 +137,7 @@ function createWindow() {
     }
   });
 
-  /* Winner related programming */
+  /* Winner storing related programming */
   ipcMain.on('set-prize', (event, arg) => {
     prize = arg;
   })
@@ -149,9 +148,27 @@ function createWindow() {
 
   ipcMain.on('lottery-is-done', (event, arg) => {
     winner = arg
-    console.log('le lot : ' + prize);
-    console.log('winner is : ' + winner)
+  
     db.run('INSERT INTO winners (date, winner, prize) VALUES (date("now"), "' + winner + '", "' + prize  + '")')
+  })
+
+  /* Winner getting related programming */
+
+  ipcMain.on('get-winners', (event) => {
+    db.all('SELECT * FROM winners ORDER BY date DESC', (err, row) => {
+      query = row
+      event.returnValue = query;
+    })
+  })
+
+  ipcMain.on('remove-winner', (event, arg) => {
+    db.run('DELETE FROM winners WHERE id = ? ', arg );
+    event.reply('winner-removed');
+  })
+
+  ipcMain.on('delete-winner-db', (event) => {
+    db.run('DELETE FROM winners');
+    event.reply('winner-db-deleted')
   })
 
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ParticipantService } from '../participant.service';
 import { Participant } from '../participant.model';
 import { ElectronService } from '../electron.service';
+import { WinnersService } from '../winners.service';
+import { Winner } from '../winner.model';
 
 @Component({
   selector: 'app-lottery',
@@ -11,15 +13,18 @@ import { ElectronService } from '../electron.service';
 export class LotteryComponent implements OnInit {
   show: boolean;
   disabled: boolean;
+  sliderText: string;
   displayPlayer = 'Player';
   constructor(private participantService: ParticipantService, 
-              private electron: ElectronService) {}
+              private electron: ElectronService,
+              private winServ: WinnersService) {}
 
   ngOnInit() {
     this.show = this.participantService.getAllParticipant().length === 0 ? true : false;
     this.disabled = this.participantService.getAllParticipant().length === 0 ? true : false;
     const body = document.getElementsByTagName('body').item(0);
     const text = <HTMLElement>document.getElementById('noPart');
+    this.showWinnerF()
   }
 
   go() {
@@ -38,12 +43,9 @@ export class LotteryComponent implements OnInit {
     const winPos = Math.floor(Math.random() * (listParticipant.length + 1));
     this.winner(listParticipant).then(() => {
       this.displayPlayer = listParticipant[winPos];
-      let electronWinner = this.displayPlayer;
-      this.reveal();
-      /* sending winer name to electron */
-      this.electron.ipcRenderer.send('lottery-is-done', electronWinner);
-      
+      this.reveal();      
     });
+    this.electron.ipcRenderer.send('lottery-is-done', listParticipant[winPos]);
   }
 
   async winner(list: string[]) {
@@ -77,4 +79,23 @@ export class LotteryComponent implements OnInit {
   nbOfTicket() {
     return this.participantService.getNumberOfTicket();
   }
+
+  showWinnerF() {
+    this.winServ.getWinner();
+    let lastWinner: Winner[] = this.winServ.getWinCol();
+    if (lastWinner.length !== 0) {
+      if (lastWinner.length === 1) {
+        this.sliderText = lastWinner[0].getFullInfo();
+      } else if (lastWinner.length === 2) {
+        this.sliderText = lastWinner[0].getFullInfo() + ' | ' +  lastWinner[1].getFullInfo();
+      } else {
+        this.sliderText = lastWinner[0].getFullInfo() + ' | ' +  lastWinner[2].getFullInfo() + ' | ' +  lastWinner[3].getFullInfo();
+      } 
+    } else {
+      this.sliderText = 'Il n\'y a pas de gagnant pour le moment'
+    }
+  }
+    
+
+  
 }

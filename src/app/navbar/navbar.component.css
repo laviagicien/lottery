@@ -139,3 +139,27 @@ img, .darkmode-ignore {
     position:relative;
     z-index: 15
 }
+
+/* checkMark */ 
+#Calque_1 {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    z-index: 100;
+    margin-left: 130px;
+}
+
+.st0 {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+}
+
+.dash {
+    animation: dash 2s linear forwards;
+}
+
+@keyframes dash{
+    to {
+        stroke-dashoffset: 0;
+    }
+}

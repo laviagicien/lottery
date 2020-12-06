@@ -1,26 +1,26 @@
 .head {
     margin-top: 5%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 4fr 4fr 4fr 1fr;
 }
+
+.body {
+    overflow-y: scroll;
+}
+
+.body::-webkit-scrollbar {
+    display: none;
+}
+
 .winRow {
     
     margin-top:1%;
-    
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 4fr 4fr 4fr 1fr;
 }
 
 .winner, .date, .prize {
     text-align: center;
-}
-
-.winner, .date {
-   /*  border-right: 1px solid black; */
-}
-
-.winner, .prize {
-  /*   border-left : 1px solid black; */
 }
 
 .winnerR, .dateR, .prizeR {
@@ -30,8 +30,4 @@
 
 .body h5 {
     line-height: 35px;
-}
-
-.empty {
-    content:"";
 }

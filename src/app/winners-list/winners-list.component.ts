@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../electron.service';
 import { Winner } from '../winner.model';
+import { WinnersService } from '../winners.service'
 
 @Component({
   selector: 'app-winners-list',
@@ -9,20 +10,21 @@ import { Winner } from '../winner.model';
 })
 export class WinnersListComponent implements OnInit {
   
-  winnersColl: Winner[] = [
-    new Winner("date1", "name1", "prize1"),
-    new Winner("date2", "name2", "prize2"),
-    new Winner("date3", "name3", "prize3")
-  ];
+  winnersColl: Winner[];
   
-  constructor(private electronService: ElectronService) { }
+  constructor(private electronService: ElectronService,
+              private winServ: WinnersService) { }
 
   ngOnInit() {
-
+    this.winServ.getWinner();
+    this.winnersColl = this.winServ.getWinCol();
   }
   
   deleteWinner(i: number) {
-    this.winnersColl.splice(i, 1);
+    this.winServ.removeWinner(i);
+    this.winnersColl = [];
+    this.winServ.getWinner();
+    this.winnersColl = this.winServ.getWinCol();
   }
 
 
